@@ -261,6 +261,7 @@ if __name__ == "__main__":
                                                                                 min_impressions=args.min_impressions,
                                                                                 min_clicks=args.min_clicks)  # impressions as a Pandas DataFrame
         print("Writing impressions to file: %s/%s" % (output_dir, args.impressions_file))
+        print(impressions_df.head())
         impressions_df.to_csv("%s/%s" % (output_dir, args.impressions_file), index=False)
         query_ids = query_ids_map
         # be sure to write out our query id map

@@ -154,7 +154,8 @@ class DataPrepper:
                             total_clicked_docs_per_query += 1
                         num_impressions.append(query_times_seen)
                         clicks.append(num_clicks)
-                        if hit['_source'].get('name') is not None:
+                        if len(hit['_source']['name'])>0:
+                            #print(hit['_source']['name'])
                             product_names.append(hit['_source']['name'][0])
                         else:
                             product_names.append("SKU: %s -- No Name" % sku)
@@ -179,9 +180,10 @@ class DataPrepper:
             "num_impressions": num_impressions,
             "product_name": product_names
         })
+        print(impressions_df.head())
         # remove low click/impressions,
-        #remove low click/impressions
-        impressions_df = impressions_df[(impressions_df['num_impressions'] >= min_impressions) & (impressions_df['clicks'] >= min_clicks)]
+        # remove low click/impressions
+        # impressions_df = impressions_df[(impressions_df['num_impressions'] >= min_impressions) & (impressions_df['clicks'] >= min_clicks)]
 
         return impressions_df, query_ids_map
 
